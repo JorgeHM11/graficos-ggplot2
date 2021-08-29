@@ -1,0 +1,29 @@
+
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel(title = "Mi segunda aplicación, paso a
+             paso"),
+  sidebarLayout(
+    sidebarPanel(
+      numericInput(inputId = "n", "Tamaño de la muestra", value = 1000),
+      checkboxInput("cajaVerif", "Añadir densidad", value = TRUE)
+    ),
+    mainPanel(plotOutput(outpudId = "histograma"))
+    ))
+
+server <- function(input, output) {
+          output$histograma <- renderPlot({
+            set.seed(111)
+            hist(rnorm(input$n), freq = FALSE, col = "green",
+                 main = "Histograma",
+                 xlab = "Data muestra")
+            
+            if(input$cajaVerif == T){curve(dnorm(x,0,1),
+            add = TRUE, wd = 3, col = "red")}
+          })
+}
+          shinyApp(ui = ui, server = server)
+
+
+

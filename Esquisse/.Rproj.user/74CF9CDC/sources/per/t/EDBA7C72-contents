@@ -1,0 +1,19 @@
+
+
+library(ggplot2)
+library(ggthemes)
+library(esquisse)
+library(tidyverse)
+
+tesis <- readxl::read_xlsx("Data simulada.xlsx")
+
+tesis %>% 
+  ggplot(aes(x=AÑO)) +
+         geom_bar()
+
+tesis %>% 
+  ggplot(aes(x=UNIV)) +
+         geom_bar() +
+         theme_minimal()
+
+
