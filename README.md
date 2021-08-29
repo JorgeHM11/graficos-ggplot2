@@ -1,1 +1,1 @@
-# graficos-ggplot2
+## Galería de gráficos elaborados con el paquete {ggplot2}
