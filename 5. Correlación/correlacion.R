@@ -2,9 +2,9 @@
 library(pacman)
 p_load(dplyr, ggplot2, reshape2, datos, apaTables, psych, corrr)
 
-# Elaborar gráficos -----------------------------------------------------------
-
 flores <- select(flores, -Especies) #Seleccionar variables continuas
+
+# Elaborar gráficos -----------------------------------------------------------
 
 # Mapa de calor
 g1 <- melt(cor(flores)) %>% 
@@ -24,12 +24,11 @@ g1 <- melt(cor(flores)) %>%
   theme_classic()
 
 # Diagrama de redes
-pairs.panels(flores, pch = 20,stars = TRUE, main = "Correlación de las variables")
-
-# Histograma y dispersión 
 g2 <- correlate(flores, method = "pearson") %>% 
   network_plot()
 
+# Histograma y dispersión 
+pairs.panels(flores, pch = 20,stars = TRUE, main = "Correlación de variables")
 
 # Exportar tabla en formato APA -------------------------------------------
 apa.cor.table(flores, filename = "tabla_correlacion.doc", table.number = 1,
