@@ -6,6 +6,7 @@ Galería de gráficos elaborados con el paquete [ggplot2](https://github.com/tid
 - [x] Histograma
 - [x] Densidad
 - [x] Dispersión
+- [ ] Boxplot
 - [x] Correlación
 - [ ] De líneas
 
