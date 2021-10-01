@@ -1,0 +1,82 @@
+---
+title: "Untitled"
+author: "Jorge Huanca-Martinez"
+date: "22/9/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r warning = FALSE}
+library(tidyverse)
+library(datos)
+library(gghighlight)
+```
+
+```{r}
+df <- paises
+
+glimpse(df)
+```
+
+```{r}
+p1 <- df %>% 
+  filter(pais %in% c ("Suiza", "Brasil", "Zimbabue", "Perú",
+                      "Australia")) %>% 
+  ggplot(aes(x = anio, y = esperanza_de_vida, color = pais)) +
+  geom_line() +
+  geom_point(size = 1) +
+  gghighlight(
+    min(esperanza_de_vida) > 60
+  ) +
+  theme_bw() +
+  labs(x = NULL, y = NULL)
+```
+```{r}
+p2 <- df %>% 
+  ggplot(aes(x = esperanza_de_vida, y = continente)) +
+  geom_col()
+```
+
+```{r}
+#Unir imágenes con patchwork
+library(patchwork)
+
+((p1 + p2) / p2) +
+  plot_annotation(title = "mi primera gráfica con patchwork, qué bien") +
+  theme_bw()
+  
+```
+```{r}
+p1 + plot_spacer() +
+p2 + plot_spacer() +
+p2 + plot_spacer()  
+```
+
+```{r}
+p1 + p2 +
+p1 + p2 + 
+plot_spacer() + p2 +
+  plot_layout(widths = c(3,1))
+```
+```{r}
+p2 + 
+  inset_element(p1,
+                left = 0.6,
+                bottom = 0.6,
+                right = 1,
+                top = 1)
+```
+```{r}
+p <- (p1 + p2) / p2
+
+p + plot_annotation(
+  title = "Mi primera gráfica",
+  subtitle = "Mi primer subtítulo",
+  caption = "Jorge Huanca Martinez \n Psicología - UNMSM",
+  tag_levels = "A"
+) 
+```
+
